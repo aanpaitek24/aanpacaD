@@ -82,7 +82,7 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                 },
                 child: Icon(
                   Icons.power_settings_new_rounded,
-                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  color: FlutterFlowTheme.of(context).warning,
                   size: 24.0,
                 ),
               ),
@@ -180,7 +180,7 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          45.0, 12.0, 45.0, 12.0),
+                                          45.0, 24.0, 45.0, 12.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           context.pushNamed('CreateEdit');

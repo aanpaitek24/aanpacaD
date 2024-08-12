@@ -293,7 +293,7 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
                                                   Icons.add_a_photo,
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryText,
+                                                      .accent1,
                                                   size: 24.0,
                                                 ),
                                               ),
