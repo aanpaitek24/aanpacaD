@@ -143,6 +143,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'CreateEdit')
               : const CreateEditWidget(),
+        ),
+        FFRoute(
+          name: 'Scanner',
+          path: '/scanner',
+          builder: (context, params) => const ScannerWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -70,6 +70,11 @@ class UsersRecord extends FirestoreRecord {
   String get grade => _grade ?? '';
   bool hasGrade() => _grade != null;
 
+  // "qrcode" field.
+  String? _qrcode;
+  String get qrcode => _qrcode ?? '';
+  bool hasQrcode() => _qrcode != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -82,6 +87,7 @@ class UsersRecord extends FirestoreRecord {
     _guardianPhone = snapshotData['guardianPhone'] as String?;
     _address = snapshotData['address'] as LatLng?;
     _grade = snapshotData['grade'] as String?;
+    _qrcode = snapshotData['qrcode'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -129,6 +135,7 @@ Map<String, dynamic> createUsersRecordData({
   String? guardianPhone,
   LatLng? address,
   String? grade,
+  String? qrcode,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -143,6 +150,7 @@ Map<String, dynamic> createUsersRecordData({
       'guardianPhone': guardianPhone,
       'address': address,
       'grade': grade,
+      'qrcode': qrcode,
     }.withoutNulls,
   );
 
@@ -164,7 +172,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.guardianName == e2?.guardianName &&
         e1?.guardianPhone == e2?.guardianPhone &&
         e1?.address == e2?.address &&
-        e1?.grade == e2?.grade;
+        e1?.grade == e2?.grade &&
+        e1?.qrcode == e2?.qrcode;
   }
 
   @override
@@ -179,7 +188,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.guardianName,
         e?.guardianPhone,
         e?.address,
-        e?.grade
+        e?.grade,
+        e?.qrcode
       ]);
 
   @override

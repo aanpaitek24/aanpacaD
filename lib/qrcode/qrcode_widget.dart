@@ -143,13 +143,13 @@ class _QrcodeWidgetState extends State<QrcodeWidget> {
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                   child: AuthUserStreamWidget(
                     builder: (context) => BarcodeWidget(
-                      data: valueOrDefault(currentUserDocument?.qrId, 0)
-                          .toString(),
+                      data: valueOrDefault(currentUserDocument?.qrcode, ''),
                       barcode: Barcode.qrCode(),
                       width: 300.0,
                       height: 300.0,
                       color: FlutterFlowTheme.of(context).primaryText,
-                      backgroundColor: Colors.transparent,
+                      backgroundColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
                       errorBuilder: (context, error) => const SizedBox(
                         width: 300.0,
                         height: 300.0,

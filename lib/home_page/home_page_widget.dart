@@ -320,18 +320,25 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                   width: 1.0,
                                                                 ),
                                                               ),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                child: Image
-                                                                    .network(
-                                                                  'https://i.pinimg.com/originals/99/8f/41/998f41fc4c63e69c06b99a6e03629815.jpg',
-                                                                  width: 300.0,
-                                                                  height: 200.0,
-                                                                  fit: BoxFit
-                                                                      .cover,
+                                                              child:
+                                                                  AuthUserStreamWidget(
+                                                                builder:
+                                                                    (context) =>
+                                                                        ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                  child: Image
+                                                                      .network(
+                                                                    currentUserPhoto,
+                                                                    width:
+                                                                        300.0,
+                                                                    height:
+                                                                        200.0,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
@@ -1875,19 +1882,22 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                           .rectangle,
                                                                     ),
                                                                     child:
-                                                                        ClipRRect(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              24.0),
-                                                                      child: Image
-                                                                          .network(
-                                                                        'https://i.pinimg.com/originals/99/8f/41/998f41fc4c63e69c06b99a6e03629815.jpg',
-                                                                        width:
-                                                                            67.0,
-                                                                        height:
-                                                                            51.0,
-                                                                        fit: BoxFit
-                                                                            .cover,
+                                                                        AuthUserStreamWidget(
+                                                                      builder:
+                                                                          (context) =>
+                                                                              ClipRRect(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(24.0),
+                                                                        child: Image
+                                                                            .network(
+                                                                          currentUserPhoto,
+                                                                          width:
+                                                                              67.0,
+                                                                          height:
+                                                                              51.0,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),

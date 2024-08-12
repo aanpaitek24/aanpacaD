@@ -101,7 +101,7 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
                     },
                     child: Icon(
                       Icons.close,
-                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      color: FlutterFlowTheme.of(context).info,
                       size: 24.0,
                     ),
                   ),
@@ -172,10 +172,7 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
                                             const Duration(milliseconds: 500),
                                         fadeOutDuration:
                                             const Duration(milliseconds: 500),
-                                        imageUrl: valueOrDefault<String>(
-                                          currentUserPhoto,
-                                          'https://i.pinimg.com/originals/99/8f/41/998f41fc4c63e69c06b99a6e03629815.jpg',
-                                        ),
+                                        imageUrl: currentUserPhoto,
                                         width: double.infinity,
                                         height: double.infinity,
                                         fit: BoxFit.cover,

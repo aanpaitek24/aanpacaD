@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -61,19 +62,29 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'My Profile',
-                      style:
-                          FlutterFlowTheme.of(context).headlineMedium.override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .headlineMediumFamily,
-                                color: Colors.white,
-                                fontSize: 22.0,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .headlineMediumFamily),
-                              ),
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('Scanner');
+                      },
+                      child: Text(
+                        'My Profile',
+                        style: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .override(
+                              fontFamily: FlutterFlowTheme.of(context)
+                                  .headlineMediumFamily,
+                              color: Colors.white,
+                              fontSize: 22.0,
+                              letterSpacing: 0.0,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .headlineMediumFamily),
+                            ),
+                      ),
                     ),
                     InkWell(
                       splashColor: Colors.transparent,
@@ -556,6 +567,13 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                     return;
                                                                   }
                                                                 }
+
+                                                                await currentUserReference!
+                                                                    .update(
+                                                                        createUsersRecordData(
+                                                                  photoUrl: _model
+                                                                      .uploadedFileUrl,
+                                                                ));
                                                               },
                                                               child: ClipRRect(
                                                                 borderRadius:
@@ -564,11 +582,7 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                             24.0),
                                                                 child: Image
                                                                     .network(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    currentUserPhoto,
-                                                                    'https://i.pinimg.com/originals/99/8f/41/998f41fc4c63e69c06b99a6e03629815.jpg',
-                                                                  ),
+                                                                  currentUserPhoto,
                                                                   width: 67.0,
                                                                   height: 51.0,
                                                                   fit: BoxFit
