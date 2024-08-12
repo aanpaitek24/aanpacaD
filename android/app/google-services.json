@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "737366060428",
+    "firebase_url": "https://dashboard-8uy8j1-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "dashboard-8uy8j1",
+    "storage_bucket": "dashboard-8uy8j1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737366060428:android:cc59a899c88d0102997aa9",
+        "android_client_info": {
+          "package_name": "com.academy.dashboard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYEaftisGlyWCx-Gy3ZYJYiB-wa-1F1PM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
