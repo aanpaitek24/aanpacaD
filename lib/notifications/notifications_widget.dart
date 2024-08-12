@@ -39,23 +39,30 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Notifications',
-            style: FlutterFlowTheme.of(context).headlineLarge.override(
-                  fontFamily: FlutterFlowTheme.of(context).headlineLargeFamily,
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).headlineLargeFamily),
+        appBar: responsiveVisibility(
+          context: context,
+          tabletLandscape: false,
+          desktop: false,
+        )
+            ? AppBar(
+                backgroundColor: FlutterFlowTheme.of(context).primary,
+                automaticallyImplyLeading: false,
+                title: Text(
+                  'Notifications',
+                  style: FlutterFlowTheme.of(context).headlineLarge.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).headlineLargeFamily,
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).headlineLargeFamily),
+                      ),
                 ),
-          ),
-          actions: const [],
-          centerTitle: false,
-          elevation: 2.0,
-        ),
+                actions: const [],
+                centerTitle: false,
+                elevation: 2.0,
+              )
+            : null,
         body: SafeArea(
           top: true,
           child: Visibility(

@@ -43,40 +43,47 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30.0,
-          borderWidth: 1.0,
-          buttonSize: 60.0,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: FlutterFlowTheme.of(context).primaryText,
-            size: 30.0,
-          ),
-          onPressed: () async {
-            context.pop();
-          },
-        ),
-        title: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
-          child: Text(
-            'Back',
-            style: FlutterFlowTheme.of(context).displaySmall.override(
-                  fontFamily: FlutterFlowTheme.of(context).displaySmallFamily,
-                  fontSize: 16.0,
-                  letterSpacing: 0.0,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).displaySmallFamily),
+      appBar: responsiveVisibility(
+        context: context,
+        tabletLandscape: false,
+        desktop: false,
+      )
+          ? AppBar(
+              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+              automaticallyImplyLeading: false,
+              leading: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: Icon(
+                  Icons.arrow_back_rounded,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 30.0,
                 ),
-          ),
-        ),
-        actions: const [],
-        centerTitle: false,
-        elevation: 0.0,
-      ),
+                onPressed: () async {
+                  context.pop();
+                },
+              ),
+              title: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 0.0, 0.0),
+                child: Text(
+                  'Back',
+                  style: FlutterFlowTheme.of(context).displaySmall.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).displaySmallFamily,
+                        fontSize: 16.0,
+                        letterSpacing: 0.0,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).displaySmallFamily),
+                      ),
+                ),
+              ),
+              actions: const [],
+              centerTitle: false,
+              elevation: 0.0,
+            )
+          : null,
       body: Align(
         alignment: const AlignmentDirectional(0.0, -1.0),
         child: Container(
