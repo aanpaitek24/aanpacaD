@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home_students_model.dart';
 export 'home_students_model.dart';
@@ -25,6 +26,11 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomeStudentsModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setDarkModeSetting(context, ThemeMode.light);
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -102,7 +108,9 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        decoration: const BoxDecoration(),
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                        ),
                         child: Stack(
                           children: [
                             Padding(
@@ -639,6 +647,9 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                   fontFamily: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMediumFamily,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .accent1,
                                                                   fontSize:
                                                                       18.0,
                                                                   letterSpacing:
@@ -720,6 +731,9 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                     fontFamily:
                                                                         FlutterFlowTheme.of(context)
                                                                             .bodyMediumFamily,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent1,
                                                                     fontSize:
                                                                         12.0,
                                                                     letterSpacing:
@@ -820,6 +834,9 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                     fontFamily:
                                                                         FlutterFlowTheme.of(context)
                                                                             .bodyMediumFamily,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent1,
                                                                     fontSize:
                                                                         14.0,
                                                                     letterSpacing:
@@ -837,7 +854,7 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                               thickness: 1.0,
                                                               color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .primaryText,
+                                                                  .accent1,
                                                             ),
                                                             Text(
                                                               'Principal',
@@ -851,6 +868,9 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                     fontFamily:
                                                                         FlutterFlowTheme.of(context)
                                                                             .bodyMediumFamily,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent1,
                                                                     fontSize:
                                                                         12.0,
                                                                     letterSpacing:

@@ -553,12 +553,8 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                             .update(createUsersRecordData(
                                               qrId: random_data.randomInteger(
                                                   100000, 999999),
-                                              displayName:
-                                                  valueOrDefault<String>(
-                                                _model.fullNameTextController
-                                                    .text,
-                                                'My Full Name',
-                                              ),
+                                              displayName: _model
+                                                  .fullNameTextController.text,
                                             ));
 
                                         context.pushNamedAuth(
@@ -567,7 +563,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                       text: 'Create Account',
                                       options: FFButtonOptions(
                                         width: double.infinity,
-                                        height: 44.0,
+                                        height: 57.0,
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 0.0),
                                         iconPadding:

@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'create_edit_model.dart';
@@ -141,7 +142,7 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
                               width: 150.0,
                               height: 150.0,
                               decoration: BoxDecoration(
-                                color: const Color(0xFF5A4CD6),
+                                color: const Color(0xFFB3AEDD),
                                 borderRadius: const BorderRadius.only(
                                   bottomLeft: Radius.circular(24.0),
                                   bottomRight: Radius.circular(24.0),
@@ -156,13 +157,22 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
                               ),
                               child: Stack(
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(24.0),
-                                    child: Image.network(
-                                      _model.uploadedFileUrl,
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      fit: BoxFit.cover,
+                                  AuthUserStreamWidget(
+                                    builder: (context) => ClipRRect(
+                                      borderRadius: BorderRadius.circular(24.0),
+                                      child: CachedNetworkImage(
+                                        fadeInDuration:
+                                            const Duration(milliseconds: 500),
+                                        fadeOutDuration:
+                                            const Duration(milliseconds: 500),
+                                        imageUrl: valueOrDefault<String>(
+                                          currentUserPhoto,
+                                          'https://i.pinimg.com/originals/99/8f/41/998f41fc4c63e69c06b99a6e03629815.jpg',
+                                        ),
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                   Column(
@@ -183,7 +193,7 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
                                               width: 30.0,
                                               height: 32.0,
                                               decoration: BoxDecoration(
-                                                color: const Color(0xC9F1F4F8),
+                                                color: const Color(0xEDF1F4F8),
                                                 borderRadius:
                                                     BorderRadius.circular(24.0),
                                               ),
@@ -271,6 +281,13 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
                                                       return;
                                                     }
                                                   }
+
+                                                  await currentUserReference!
+                                                      .update(
+                                                          createUsersRecordData(
+                                                    photoUrl:
+                                                        _model.uploadedFileUrl,
+                                                  ));
                                                 },
                                                 child: Icon(
                                                   Icons.add_a_photo,
