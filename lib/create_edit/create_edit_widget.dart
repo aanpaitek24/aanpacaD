@@ -1,12 +1,11 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,25 +30,23 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
     super.initState();
     _model = createModel(context, () => CreateEditModel());
 
-    _model.yourNameTextController ??=
-        TextEditingController(text: currentUserDisplayName);
+    _model.yourNameTextController ??= TextEditingController();
     _model.yourNameFocusNode ??= FocusNode();
 
-    _model.fullNameTextController ??=
-        TextEditingController(text: currentUserDocument?.address?.toString());
+    _model.fullNameTextController ??= TextEditingController();
     _model.fullNameFocusNode ??= FocusNode();
 
-    _model.yourContactTextController ??=
-        TextEditingController(text: currentPhoneNumber);
+    _model.yourContactTextController ??= TextEditingController();
     _model.yourContactFocusNode ??= FocusNode();
 
-    _model.yourGuardianNameTextController ??= TextEditingController(
-        text: valueOrDefault(currentUserDocument?.guardianName, ''));
+    _model.yourGuardianNameTextController ??= TextEditingController();
     _model.yourGuardianNameFocusNode ??= FocusNode();
 
-    _model.guardiaPhoneTextController ??= TextEditingController(
-        text: valueOrDefault(currentUserDocument?.guardianPhone, ''));
+    _model.guardiaPhoneTextController ??= TextEditingController();
     _model.guardiaPhoneFocusNode ??= FocusNode();
+
+    _model.gradeLevelTextController ??= TextEditingController();
+    _model.gradeLevelFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -122,6 +119,7 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SingleChildScrollView(
+                primary: false,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -165,17 +163,22 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
                               child: Stack(
                                 children: [
                                   AuthUserStreamWidget(
-                                    builder: (context) => ClipRRect(
-                                      borderRadius: BorderRadius.circular(24.0),
-                                      child: CachedNetworkImage(
-                                        fadeInDuration:
-                                            const Duration(milliseconds: 500),
-                                        fadeOutDuration:
-                                            const Duration(milliseconds: 500),
-                                        imageUrl: currentUserPhoto,
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        fit: BoxFit.cover,
+                                    builder: (context) => Hero(
+                                      tag: currentUserPhoto,
+                                      transitionOnUserGestures: true,
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(24.0),
+                                        child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              const Duration(milliseconds: 500),
+                                          fadeOutDuration:
+                                              const Duration(milliseconds: 500),
+                                          imageUrl: currentUserPhoto,
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -402,386 +405,387 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => TextFormField(
-                          controller: _model.fullNameTextController,
-                          focusNode: _model.fullNameFocusNode,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Address',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: const Color(0xFF606A85),
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Plus Jakarta Sans'),
-                                ),
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: const Color(0xFF606A85),
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Plus Jakarta Sans'),
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFE5E7EB),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFF6F61EF),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFFF5963),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFFF5963),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                20.0, 24.0, 20.0, 24.0),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                      child: TextFormField(
+                        controller: _model.fullNameTextController,
+                        focusNode: _model.fullNameFocusNode,
+                        autofocus: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Address',
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: const Color(0xFF15161E),
+                                    color: const Color(0xFF606A85),
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Plus Jakarta Sans'),
                                   ),
-                          cursorColor: const Color(0xFF6F61EF),
-                          validator: _model.fullNameTextControllerValidator
-                              .asValidator(context),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => TextFormField(
-                          controller: _model.yourContactTextController,
-                          focusNode: _model.yourContactFocusNode,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Contact',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: const Color(0xFF606A85),
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Plus Jakarta Sans'),
-                                ),
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: const Color(0xFF606A85),
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Plus Jakarta Sans'),
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFE5E7EB),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFF6F61EF),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFFF5963),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFFF5963),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                20.0, 24.0, 20.0, 24.0),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: const Color(0xFF15161E),
+                                    color: const Color(0xFF606A85),
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Plus Jakarta Sans'),
                                   ),
-                          cursorColor: const Color(0xFF6F61EF),
-                          validator: _model.yourContactTextControllerValidator
-                              .asValidator(context),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFE5E7EB),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFF6F61EF),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFFF5963),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFFF5963),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 24.0, 20.0, 24.0),
                         ),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Plus Jakarta Sans',
+                              color: const Color(0xFF15161E),
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap()
+                                  .containsKey('Plus Jakarta Sans'),
+                            ),
+                        cursorColor: const Color(0xFF6F61EF),
+                        validator: _model.fullNameTextControllerValidator
+                            .asValidator(context),
                       ),
                     ),
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => TextFormField(
-                          controller: _model.yourGuardianNameTextController,
-                          focusNode: _model.yourGuardianNameFocusNode,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Guardian Name',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: const Color(0xFF606A85),
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Plus Jakarta Sans'),
-                                ),
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: const Color(0xFF606A85),
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Plus Jakarta Sans'),
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFE5E7EB),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFF6F61EF),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFFF5963),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFFF5963),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                20.0, 24.0, 20.0, 24.0),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                      child: TextFormField(
+                        controller: _model.yourContactTextController,
+                        focusNode: _model.yourContactFocusNode,
+                        autofocus: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Contact',
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: const Color(0xFF15161E),
+                                    color: const Color(0xFF606A85),
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Plus Jakarta Sans'),
                                   ),
-                          cursorColor: const Color(0xFF6F61EF),
-                          validator: _model
-                              .yourGuardianNameTextControllerValidator
-                              .asValidator(context),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => TextFormField(
-                          controller: _model.guardiaPhoneTextController,
-                          focusNode: _model.guardiaPhoneFocusNode,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Guardian Phone',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: const Color(0xFF606A85),
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Plus Jakarta Sans'),
-                                ),
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: const Color(0xFF606A85),
-                                  fontSize: 14.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Plus Jakarta Sans'),
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFE5E7EB),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFF6F61EF),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFFF5963),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFFFF5963),
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                20.0, 24.0, 20.0, 24.0),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: const Color(0xFF15161E),
+                                    color: const Color(0xFF606A85),
                                     fontSize: 14.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Plus Jakarta Sans'),
                                   ),
-                          cursorColor: const Color(0xFF6F61EF),
-                          validator: _model.guardiaPhoneTextControllerValidator
-                              .asValidator(context),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFE5E7EB),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFF6F61EF),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFFF5963),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFFF5963),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 24.0, 20.0, 24.0),
                         ),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Plus Jakarta Sans',
+                              color: const Color(0xFF15161E),
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap()
+                                  .containsKey('Plus Jakarta Sans'),
+                            ),
+                        cursorColor: const Color(0xFF6F61EF),
+                        validator: _model.yourContactTextControllerValidator
+                            .asValidator(context),
                       ),
                     ),
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => FlutterFlowDropDown<String>(
-                          controller: _model.dropDownValueController ??=
-                              FormFieldController<String>(
-                            _model.dropDownValue ??=
-                                valueOrDefault(currentUserDocument?.grade, ''),
+                      child: TextFormField(
+                        controller: _model.yourGuardianNameTextController,
+                        focusNode: _model.yourGuardianNameFocusNode,
+                        autofocus: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Guardian Name',
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: const Color(0xFF606A85),
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey('Plus Jakarta Sans'),
+                                  ),
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: const Color(0xFF606A85),
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey('Plus Jakarta Sans'),
+                                  ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFE5E7EB),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
-                          options: List<String>.from(
-                              ['Option 1', '1', '2', '3', '4', '5', '6']),
-                          optionLabels: const [
-                            'Grade 1',
-                            'Grade 2',
-                            'Grade 3',
-                            'Grade 4',
-                            'Grade 5',
-                            'Grade 6',
-                            'Faculty'
-                          ],
-                          onChanged: (val) =>
-                              setState(() => _model.dropDownValue = val),
-                          width: double.infinity,
-                          height: 58.0,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .bodyMedium
-                              .override(
-                                fontFamily: 'Plus Jakarta Sans',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 14.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.w500,
-                                useGoogleFonts: GoogleFonts.asMap()
-                                    .containsKey('Plus Jakarta Sans'),
-                              ),
-                          hintText: 'Please select grade...',
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down_rounded,
-                            color: Color(0xFF606A85),
-                            size: 24.0,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFF6F61EF),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
-                          fillColor:
-                              FlutterFlowTheme.of(context).primaryBackground,
-                          elevation: 2.0,
-                          borderColor: const Color(0xFFE5E7EB),
-                          borderWidth: 2.0,
-                          borderRadius: 12.0,
-                          margin: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 4.0, 16.0, 4.0),
-                          hidesUnderline: true,
-                          isSearchable: false,
-                          isMultiSelect: false,
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFFF5963),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFFF5963),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 24.0, 20.0, 24.0),
                         ),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Plus Jakarta Sans',
+                              color: const Color(0xFF15161E),
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap()
+                                  .containsKey('Plus Jakarta Sans'),
+                            ),
+                        cursorColor: const Color(0xFF6F61EF),
+                        validator: _model
+                            .yourGuardianNameTextControllerValidator
+                            .asValidator(context),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                      child: TextFormField(
+                        controller: _model.guardiaPhoneTextController,
+                        focusNode: _model.guardiaPhoneFocusNode,
+                        autofocus: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Guardian Phone',
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: const Color(0xFF606A85),
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey('Plus Jakarta Sans'),
+                                  ),
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: const Color(0xFF606A85),
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey('Plus Jakarta Sans'),
+                                  ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFE5E7EB),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFF6F61EF),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFFF5963),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFFF5963),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 24.0, 20.0, 24.0),
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Plus Jakarta Sans',
+                              color: const Color(0xFF15161E),
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap()
+                                  .containsKey('Plus Jakarta Sans'),
+                            ),
+                        cursorColor: const Color(0xFF6F61EF),
+                        validator: _model.guardiaPhoneTextControllerValidator
+                            .asValidator(context),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                      child: TextFormField(
+                        controller: _model.gradeLevelTextController,
+                        focusNode: _model.gradeLevelFocusNode,
+                        autofocus: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Grade or Level',
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: const Color(0xFF606A85),
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey('Plus Jakarta Sans'),
+                                  ),
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: const Color(0xFF606A85),
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey('Plus Jakarta Sans'),
+                                  ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFE5E7EB),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFF6F61EF),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFFF5963),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFFF5963),
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 24.0, 20.0, 24.0),
+                        ),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Plus Jakarta Sans',
+                              color: const Color(0xFF15161E),
+                              fontSize: 14.0,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap()
+                                  .containsKey('Plus Jakarta Sans'),
+                            ),
+                        cursorColor: const Color(0xFF6F61EF),
+                        validator: _model.gradeLevelTextControllerValidator
+                            .asValidator(context),
                       ),
                     ),
                   ],
@@ -845,35 +849,18 @@ class _CreateEditWidgetState extends State<CreateEditWidget> {
                               .update(createUsersRecordData(
                             displayName: _model.yourNameTextController.text,
                             phoneNumber: _model.yourContactTextController.text,
+                            editedTime: getCurrentTimestamp,
+                            qrCode:
+                                random_data.randomInteger(10000000, 99999999),
+                            studentGrade: _model.gradeLevelTextController.text,
                             guardianName:
                                 _model.yourGuardianNameTextController.text,
                             guardianPhone:
                                 _model.guardiaPhoneTextController.text,
-                            address: currentUserLocationValue,
-                            grade: _model.dropDownValue,
-                            photoUrl: _model.uploadedFileUrl,
+                            studentPhone: _model.yourContactTextController.text,
+                            status: true,
+                            address: currentUserLocationValue?.toString(),
                           ));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'You successfully updated your student information!',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Plus Jakarta Sans',
-                                      color: const Color(0xFF15161E),
-                                      fontSize: 14.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey('Plus Jakarta Sans'),
-                                    ),
-                              ),
-                              duration: const Duration(milliseconds: 4000),
-                              backgroundColor: const Color(0xFF39D2C0),
-                            ),
-                          );
-                          context.pop();
                         },
                         text: 'Save Changes',
                         options: FFButtonOptions(

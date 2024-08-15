@@ -383,13 +383,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                     return;
                                   }
 
-                                  context.goNamedAuth(
+                                  context.pushNamedAuth(
                                       'HomeStudents', context.mounted);
                                 },
                                 text: 'Sign In',
                                 options: FFButtonOptions(
                                   width: double.infinity,
-                                  height: 44.0,
+                                  height: 74.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   iconPadding: const EdgeInsetsDirectional.fromSTEB(

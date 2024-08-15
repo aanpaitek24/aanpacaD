@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -551,8 +550,6 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                         await UsersRecord.collection
                                             .doc(user.uid)
                                             .update(createUsersRecordData(
-                                              qrId: random_data.randomInteger(
-                                                  100000, 999999),
                                               displayName: _model
                                                   .fullNameTextController.text,
                                             ));
@@ -641,7 +638,7 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                   // You will have to add an action on this rich text to go to your login page.
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 12.0, 0.0, 12.0),
+                                        0.0, 28.0, 0.0, 12.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
                                       focusColor: Colors.transparent,

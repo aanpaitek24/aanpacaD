@@ -45,40 +45,55 @@ class UsersRecord extends FirestoreRecord {
   String get phoneNumber => _phoneNumber ?? '';
   bool hasPhoneNumber() => _phoneNumber != null;
 
-  // "qr_id" field.
-  int? _qrId;
-  int get qrId => _qrId ?? 0;
-  bool hasQrId() => _qrId != null;
+  // "edited_time" field.
+  DateTime? _editedTime;
+  DateTime? get editedTime => _editedTime;
+  bool hasEditedTime() => _editedTime != null;
 
-  // "guardianName" field.
+  // "bio" field.
+  String? _bio;
+  String get bio => _bio ?? '';
+  bool hasBio() => _bio != null;
+
+  // "user_name" field.
+  String? _userName;
+  String get userName => _userName ?? '';
+  bool hasUserName() => _userName != null;
+
+  // "qr_code" field.
+  int? _qrCode;
+  int get qrCode => _qrCode ?? 0;
+  bool hasQrCode() => _qrCode != null;
+
+  // "student_grade" field.
+  String? _studentGrade;
+  String get studentGrade => _studentGrade ?? '';
+  bool hasStudentGrade() => _studentGrade != null;
+
+  // "guardian_name" field.
   String? _guardianName;
   String get guardianName => _guardianName ?? '';
   bool hasGuardianName() => _guardianName != null;
 
-  // "guardianPhone" field.
+  // "guardian_phone" field.
   String? _guardianPhone;
   String get guardianPhone => _guardianPhone ?? '';
   bool hasGuardianPhone() => _guardianPhone != null;
 
+  // "student_phone" field.
+  String? _studentPhone;
+  String get studentPhone => _studentPhone ?? '';
+  bool hasStudentPhone() => _studentPhone != null;
+
+  // "status" field.
+  bool? _status;
+  bool get status => _status ?? false;
+  bool hasStatus() => _status != null;
+
   // "address" field.
-  LatLng? _address;
-  LatLng? get address => _address;
+  String? _address;
+  String get address => _address ?? '';
   bool hasAddress() => _address != null;
-
-  // "grade" field.
-  String? _grade;
-  String get grade => _grade ?? '';
-  bool hasGrade() => _grade != null;
-
-  // "qrcode" field.
-  String? _qrcode;
-  String get qrcode => _qrcode ?? '';
-  bool hasQrcode() => _qrcode != null;
-
-  // "gen_qr" field.
-  String? _genQr;
-  String get genQr => _genQr ?? '';
-  bool hasGenQr() => _genQr != null;
 
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
@@ -87,13 +102,16 @@ class UsersRecord extends FirestoreRecord {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
     _phoneNumber = snapshotData['phone_number'] as String?;
-    _qrId = castToType<int>(snapshotData['qr_id']);
-    _guardianName = snapshotData['guardianName'] as String?;
-    _guardianPhone = snapshotData['guardianPhone'] as String?;
-    _address = snapshotData['address'] as LatLng?;
-    _grade = snapshotData['grade'] as String?;
-    _qrcode = snapshotData['qrcode'] as String?;
-    _genQr = snapshotData['gen_qr'] as String?;
+    _editedTime = snapshotData['edited_time'] as DateTime?;
+    _bio = snapshotData['bio'] as String?;
+    _userName = snapshotData['user_name'] as String?;
+    _qrCode = castToType<int>(snapshotData['qr_code']);
+    _studentGrade = snapshotData['student_grade'] as String?;
+    _guardianName = snapshotData['guardian_name'] as String?;
+    _guardianPhone = snapshotData['guardian_phone'] as String?;
+    _studentPhone = snapshotData['student_phone'] as String?;
+    _status = snapshotData['status'] as bool?;
+    _address = snapshotData['address'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -136,13 +154,16 @@ Map<String, dynamic> createUsersRecordData({
   String? uid,
   DateTime? createdTime,
   String? phoneNumber,
-  int? qrId,
+  DateTime? editedTime,
+  String? bio,
+  String? userName,
+  int? qrCode,
+  String? studentGrade,
   String? guardianName,
   String? guardianPhone,
-  LatLng? address,
-  String? grade,
-  String? qrcode,
-  String? genQr,
+  String? studentPhone,
+  bool? status,
+  String? address,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -152,13 +173,16 @@ Map<String, dynamic> createUsersRecordData({
       'uid': uid,
       'created_time': createdTime,
       'phone_number': phoneNumber,
-      'qr_id': qrId,
-      'guardianName': guardianName,
-      'guardianPhone': guardianPhone,
+      'edited_time': editedTime,
+      'bio': bio,
+      'user_name': userName,
+      'qr_code': qrCode,
+      'student_grade': studentGrade,
+      'guardian_name': guardianName,
+      'guardian_phone': guardianPhone,
+      'student_phone': studentPhone,
+      'status': status,
       'address': address,
-      'grade': grade,
-      'qrcode': qrcode,
-      'gen_qr': genQr,
     }.withoutNulls,
   );
 
@@ -176,13 +200,16 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.uid == e2?.uid &&
         e1?.createdTime == e2?.createdTime &&
         e1?.phoneNumber == e2?.phoneNumber &&
-        e1?.qrId == e2?.qrId &&
+        e1?.editedTime == e2?.editedTime &&
+        e1?.bio == e2?.bio &&
+        e1?.userName == e2?.userName &&
+        e1?.qrCode == e2?.qrCode &&
+        e1?.studentGrade == e2?.studentGrade &&
         e1?.guardianName == e2?.guardianName &&
         e1?.guardianPhone == e2?.guardianPhone &&
-        e1?.address == e2?.address &&
-        e1?.grade == e2?.grade &&
-        e1?.qrcode == e2?.qrcode &&
-        e1?.genQr == e2?.genQr;
+        e1?.studentPhone == e2?.studentPhone &&
+        e1?.status == e2?.status &&
+        e1?.address == e2?.address;
   }
 
   @override
@@ -193,13 +220,16 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.uid,
         e?.createdTime,
         e?.phoneNumber,
-        e?.qrId,
+        e?.editedTime,
+        e?.bio,
+        e?.userName,
+        e?.qrCode,
+        e?.studentGrade,
         e?.guardianName,
         e?.guardianPhone,
-        e?.address,
-        e?.grade,
-        e?.qrcode,
-        e?.genQr
+        e?.studentPhone,
+        e?.status,
+        e?.address
       ]);
 
   @override

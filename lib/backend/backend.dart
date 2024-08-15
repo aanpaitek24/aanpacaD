@@ -6,8 +6,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/util/firestore_util.dart';
 
 import 'schema/users_record.dart';
-import 'schema/notifications_record.dart';
-import 'schema/student_attendance_record.dart';
+import 'schema/notification_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -17,8 +16,7 @@ export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
 
 export 'schema/users_record.dart';
-export 'schema/notifications_record.dart';
-export 'schema/student_attendance_record.dart';
+export 'schema/notification_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -57,78 +55,38 @@ Future<List<UsersRecord>> queryUsersRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query NotificationsRecords (as a Stream and as a Future).
-Future<int> queryNotificationsRecordCount({
+/// Functions to query NotificationRecords (as a Stream and as a Future).
+Future<int> queryNotificationRecordCount({
   Query Function(Query)? queryBuilder,
   int limit = -1,
 }) =>
     queryCollectionCount(
-      NotificationsRecord.collection,
+      NotificationRecord.collection,
       queryBuilder: queryBuilder,
       limit: limit,
     );
 
-Stream<List<NotificationsRecord>> queryNotificationsRecord({
+Stream<List<NotificationRecord>> queryNotificationRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollection(
-      NotificationsRecord.collection,
-      NotificationsRecord.fromSnapshot,
+      NotificationRecord.collection,
+      NotificationRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
     );
 
-Future<List<NotificationsRecord>> queryNotificationsRecordOnce({
+Future<List<NotificationRecord>> queryNotificationRecordOnce({
   Query Function(Query)? queryBuilder,
   int limit = -1,
   bool singleRecord = false,
 }) =>
     queryCollectionOnce(
-      NotificationsRecord.collection,
-      NotificationsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query StudentAttendanceRecords (as a Stream and as a Future).
-Future<int> queryStudentAttendanceRecordCount({
-  DocumentReference? parent,
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      StudentAttendanceRecord.collection(parent),
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<StudentAttendanceRecord>> queryStudentAttendanceRecord({
-  DocumentReference? parent,
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      StudentAttendanceRecord.collection(parent),
-      StudentAttendanceRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<StudentAttendanceRecord>> queryStudentAttendanceRecordOnce({
-  DocumentReference? parent,
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      StudentAttendanceRecord.collection(parent),
-      StudentAttendanceRecord.fromSnapshot,
+      NotificationRecord.collection,
+      NotificationRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

@@ -135,6 +135,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'Notifications': const NotificationsWidget(),
       'Calendar': const CalendarWidget(),
       'CreateEdit': const CreateEditWidget(),
+      'TeacherPrecy': const TeacherPrecyWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -176,11 +177,11 @@ class _NavBarPageState extends State<NavBarPage> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.date_range_outlined,
-              size: 24.0,
+              size: 44.0,
             ),
             activeIcon: Icon(
               Icons.date_range_rounded,
-              size: 32.0,
+              size: 44.0,
             ),
             label: 'Home',
             tooltip: '',
@@ -191,6 +192,14 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24.0,
             ),
             label: '',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.record_voice_over,
+              size: 24.0,
+            ),
+            label: 'Home',
             tooltip: '',
           )
         ],

@@ -251,6 +251,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
                                     .labelMediumFamily,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 letterSpacing: 0.0,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
@@ -279,6 +280,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                         child: FFButtonWidget(
                           onPressed: () async {
                             context.pushNamed('CreateAccount');
+
+                            context.pushNamed('HomeStudents');
                           },
                           text: 'Get Started',
                           options: FFButtonOptions(
@@ -320,6 +323,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                         child: FFButtonWidget(
                           onPressed: () async {
                             context.pushNamed('Login');
+
+                            context.pushNamed('HomeStudents');
                           },
                           text: 'My Account',
                           options: FFButtonOptions(

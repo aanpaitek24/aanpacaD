@@ -7,7 +7,6 @@ import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
 import '/main.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 export 'package:go_router/go_router.dart';
@@ -82,11 +81,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? const NavBarPage() : const OnboardingWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
-        ),
-        FFRoute(
           name: 'Notifications',
           path: '/notifications',
           builder: (context, params) => params.isEmpty
@@ -116,7 +110,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'TeacherPrecy',
           path: '/teacherPrecy',
-          builder: (context, params) => const TeacherPrecyWidget(),
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'TeacherPrecy')
+              : const TeacherPrecyWidget(),
         ),
         FFRoute(
           name: 'HomeStudents',
@@ -133,11 +129,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               : const CalendarWidget(),
         ),
         FFRoute(
-          name: 'qrcode',
-          path: '/qrcode',
-          builder: (context, params) => const QrcodeWidget(),
-        ),
-        FFRoute(
           name: 'CreateEdit',
           path: '/createEdit',
           builder: (context, params) => params.isEmpty
@@ -150,9 +141,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const ScannerWidget(),
         ),
         FFRoute(
-          name: 'qrcodeCopy',
-          path: '/qrcodeCopy',
-          builder: (context, params) => const QrcodeCopyWidget(),
+          name: 'qrcode',
+          path: '/qrcode',
+          builder: (context, params) => const QrcodeWidget(),
+        ),
+        FFRoute(
+          name: 'homePage',
+          path: '/homePage',
+          builder: (context, params) => const HomePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -340,7 +336,7 @@ class FFRoute {
               ? isWeb
                   ? Container()
                   : Container(
-                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      color: const Color(0xFF93F2AE),
                       child: Center(
                         child: Image.asset(
                           'assets/images/Untitled_design_(1).png',

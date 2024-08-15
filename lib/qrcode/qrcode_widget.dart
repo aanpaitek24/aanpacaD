@@ -1,6 +1,7 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_web_view.dart';
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'qrcode_model.dart';
@@ -113,13 +114,104 @@ class _QrcodeWidgetState extends State<QrcodeWidget> {
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
           ),
-          child: FlutterFlowWebView(
-            content: 'https://flutter.dev',
-            bypass: false,
-            width: MediaQuery.sizeOf(context).width * 1.0,
-            height: MediaQuery.sizeOf(context).height * 1.0,
-            verticalScroll: false,
-            horizontalScroll: false,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Material(
+                color: Colors.transparent,
+                elevation: 8.0,
+                child: Container(
+                  width: 300.0,
+                  height: 300.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    border: Border.all(
+                      width: 1.0,
+                    ),
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
+                    child: AuthUserStreamWidget(
+                      builder: (context) => BarcodeWidget(
+                        data: valueOrDefault(currentUserDocument?.qrCode, 0)
+                            .toString(),
+                        barcode: Barcode.qrCode(),
+                        width: 300.0,
+                        height: 300.0,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        backgroundColor:
+                            FlutterFlowTheme.of(context).secondaryBackground,
+                        errorBuilder: (context, error) => const SizedBox(
+                          width: 300.0,
+                          height: 300.0,
+                        ),
+                        drawText: false,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(40.0, 25.0, 40.0, 0.0),
+                child: Material(
+                  color: Colors.transparent,
+                  elevation: 8.0,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(8.0),
+                      bottomRight: Radius.circular(8.0),
+                      topLeft: Radius.circular(8.0),
+                      topRight: Radius.circular(8.0),
+                    ),
+                  ),
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width * 0.929,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(8.0),
+                        bottomRight: Radius.circular(8.0),
+                        topLeft: Radius.circular(8.0),
+                        topRight: Radius.circular(8.0),
+                      ),
+                      border: Border.all(
+                        width: 2.0,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 10.0, 0.0, 10.0),
+                          child: AuthUserStreamWidget(
+                            builder: (context) => Text(
+                              'ID  ${valueOrDefault(currentUserDocument?.qrCode, 0).toString()}',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
+                                    fontSize: 26.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyMediumFamily),
+                                  ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -52,10 +52,11 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: responsiveVisibility(
-          context: context,
-          tabletLandscape: false,
-          desktop: false,
-        )
+                  context: context,
+                  tabletLandscape: false,
+                  desktop: false,
+                ) &&
+                (currentUserEmail == 'admin@directortim.aanp')
             ? AppBar(
                 backgroundColor: FlutterFlowTheme.of(context).primary,
                 automaticallyImplyLeading: false,
@@ -252,10 +253,10 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                         onPressed: () async {
                                           context.pushNamed('qrcode');
                                         },
-                                        text: 'View QR',
+                                        text: 'My  QR Code',
                                         icon: const Icon(
-                                          Icons.receipt_long,
-                                          size: 15.0,
+                                          Icons.qr_code_2_outlined,
+                                          size: 30.0,
                                         ),
                                         options: FFButtonOptions(
                                           width: double.infinity,
@@ -265,7 +266,7 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
-                                              .primary,
+                                              .tertiary,
                                           textStyle: FlutterFlowTheme.of(
                                                   context)
                                               .titleSmall
@@ -439,16 +440,16 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                               BorderRadius.only(
                                                             bottomLeft:
                                                                 Radius.circular(
-                                                                    24.0),
+                                                                    22.0),
                                                             bottomRight:
                                                                 Radius.circular(
-                                                                    24.0),
+                                                                    22.0),
                                                             topLeft:
                                                                 Radius.circular(
-                                                                    24.0),
+                                                                    22.0),
                                                             topRight:
                                                                 Radius.circular(
-                                                                    24.0),
+                                                                    22.0),
                                                           ),
                                                         ),
                                                         child: ClipRRect(
@@ -456,28 +457,28 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                               const BorderRadius.only(
                                                             bottomLeft:
                                                                 Radius.circular(
-                                                                    24.0),
+                                                                    22.0),
                                                             bottomRight:
                                                                 Radius.circular(
-                                                                    24.0),
+                                                                    22.0),
                                                             topLeft:
                                                                 Radius.circular(
-                                                                    24.0),
+                                                                    22.0),
                                                             topRight:
                                                                 Radius.circular(
-                                                                    24.0),
+                                                                    22.0),
                                                           ),
                                                           child: Container(
                                                             width: MediaQuery
                                                                         .sizeOf(
                                                                             context)
                                                                     .width *
-                                                                0.32,
+                                                                0.321,
                                                             height: MediaQuery
                                                                         .sizeOf(
                                                                             context)
                                                                     .height *
-                                                                0.16,
+                                                                0.154,
                                                             decoration:
                                                                 BoxDecoration(
                                                               color: FlutterFlowTheme
@@ -488,16 +489,16 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                       .only(
                                                                 bottomLeft: Radius
                                                                     .circular(
-                                                                        24.0),
+                                                                        22.0),
                                                                 bottomRight: Radius
                                                                     .circular(
-                                                                        24.0),
+                                                                        22.0),
                                                                 topLeft: Radius
                                                                     .circular(
-                                                                        24.0),
+                                                                        22.0),
                                                                 topRight: Radius
                                                                     .circular(
-                                                                        24.0),
+                                                                        22.0),
                                                               ),
                                                               shape: BoxShape
                                                                   .rectangle,
@@ -539,12 +540,6 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                     var downloadUrls =
                                                                         <String>[];
                                                                     try {
-                                                                      showUploadMessage(
-                                                                        context,
-                                                                        'Uploading file...',
-                                                                        showLoading:
-                                                                            true,
-                                                                      );
                                                                       selectedUploadedFiles = selectedMedia
                                                                           .map((m) => FFUploadedFile(
                                                                                 name: m.storagePath.split('/').last,
@@ -571,9 +566,6 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                               u!)
                                                                           .toList();
                                                                     } finally {
-                                                                      ScaffoldMessenger.of(
-                                                                              context)
-                                                                          .hideCurrentSnackBar();
                                                                       _model.isDataUploading =
                                                                           false;
                                                                     }
@@ -589,15 +581,9 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                         _model.uploadedFileUrl =
                                                                             downloadUrls.first;
                                                                       });
-                                                                      showUploadMessage(
-                                                                          context,
-                                                                          'Success!');
                                                                     } else {
                                                                       setState(
                                                                           () {});
-                                                                      showUploadMessage(
-                                                                          context,
-                                                                          'Failed to upload data');
                                                                       return;
                                                                     }
                                                                   }
@@ -608,27 +594,6 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                     photoUrl: _model
                                                                         .uploadedFileUrl,
                                                                   ));
-                                                                  ScaffoldMessenger.of(
-                                                                          context)
-                                                                      .showSnackBar(
-                                                                    SnackBar(
-                                                                      content:
-                                                                          Text(
-                                                                        'Successfully Added Photo',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primaryText,
-                                                                        ),
-                                                                      ),
-                                                                      duration: const Duration(
-                                                                          milliseconds:
-                                                                              4000),
-                                                                      backgroundColor:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .secondary,
-                                                                    ),
-                                                                  );
                                                                 },
                                                                 child:
                                                                     ClipRRect(
@@ -650,7 +615,7 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                         currentUserPhoto,
                                                                     width: MediaQuery.sizeOf(context)
                                                                             .width *
-                                                                        0.32,
+                                                                        0.3,
                                                                     height: MediaQuery.sizeOf(context)
                                                                             .height *
                                                                         0.16,
@@ -729,7 +694,11 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                             AuthUserStreamWidget(
                                                           builder: (context) =>
                                                               Text(
-                                                            currentUserDisplayName,
+                                                            valueOrDefault<
+                                                                String>(
+                                                              currentUserDisplayName,
+                                                              'Student Name',
+                                                            ),
                                                             textAlign: TextAlign
                                                                 .center,
                                                             style: FlutterFlowTheme
@@ -812,7 +781,11 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                             builder:
                                                                 (context) =>
                                                                     Text(
-                                                              'ID  ${valueOrDefault(currentUserDocument?.qrId, 0).toString()}',
+                                                              valueOrDefault(
+                                                                      currentUserDocument
+                                                                          ?.qrCode,
+                                                                      0)
+                                                                  .toString(),
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,

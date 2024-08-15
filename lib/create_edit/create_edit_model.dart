@@ -1,5 +1,4 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'create_edit_widget.dart' show CreateEditWidget;
 import 'package:flutter/material.dart';
 
@@ -32,9 +31,10 @@ class CreateEditModel extends FlutterFlowModel<CreateEditWidget> {
   FocusNode? guardiaPhoneFocusNode;
   TextEditingController? guardiaPhoneTextController;
   String? Function(BuildContext, String?)? guardiaPhoneTextControllerValidator;
-  // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
+  // State field(s) for gradeLevel widget.
+  FocusNode? gradeLevelFocusNode;
+  TextEditingController? gradeLevelTextController;
+  String? Function(BuildContext, String?)? gradeLevelTextControllerValidator;
 
   @override
   void initState(BuildContext context) {}
@@ -55,5 +55,8 @@ class CreateEditModel extends FlutterFlowModel<CreateEditWidget> {
 
     guardiaPhoneFocusNode?.dispose();
     guardiaPhoneTextController?.dispose();
+
+    gradeLevelFocusNode?.dispose();
+    gradeLevelTextController?.dispose();
   }
 }

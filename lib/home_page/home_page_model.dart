@@ -1,5 +1,4 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'home_page_widget.dart' show HomePageWidget;
 import 'package:flutter/material.dart';
 import 'package:signature/signature.dart';
@@ -27,9 +26,11 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   FocusNode? yourNameFocusNode4;
   TextEditingController? yourNameTextController4;
   String? Function(BuildContext, String?)? yourNameTextController4Validator;
-  // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
+  // State field(s) for yourStudentGrade widget.
+  FocusNode? yourStudentGradeFocusNode;
+  TextEditingController? yourStudentGradeTextController;
+  String? Function(BuildContext, String?)?
+      yourStudentGradeTextControllerValidator;
   // State field(s) for Signature widget.
   SignatureController? signatureController;
 
@@ -52,6 +53,9 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
 
     yourNameFocusNode4?.dispose();
     yourNameTextController4?.dispose();
+
+    yourStudentGradeFocusNode?.dispose();
+    yourStudentGradeTextController?.dispose();
 
     signatureController?.dispose();
   }
