@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -450,143 +451,212 @@ class _HomeStudentsWidgetState extends State<HomeStudentsWidget> {
                                                                     24.0),
                                                           ),
                                                         ),
-                                                        child: Container(
-                                                          width: 131.0,
-                                                          height: 132.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                    .only(
-                                                              bottomLeft: Radius
-                                                                  .circular(
-                                                                      24.0),
-                                                              bottomRight:
-                                                                  Radius
-                                                                      .circular(
-                                                                          24.0),
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                      24.0),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      24.0),
-                                                            ),
-                                                            shape: BoxShape
-                                                                .rectangle,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              const BorderRadius.only(
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    24.0),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    24.0),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    24.0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    24.0),
                                                           ),
-                                                          child:
-                                                              AuthUserStreamWidget(
-                                                            builder:
-                                                                (context) =>
-                                                                    InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                final selectedMedia =
-                                                                    await selectMediaWithSourceBottomSheet(
-                                                                  context:
-                                                                      context,
-                                                                  allowPhoto:
-                                                                      true,
-                                                                );
-                                                                if (selectedMedia !=
-                                                                        null &&
-                                                                    selectedMedia.every((m) =>
-                                                                        validateFileFormat(
-                                                                            m.storagePath,
-                                                                            context))) {
-                                                                  setState(() =>
+                                                          child: Container(
+                                                            width: MediaQuery
+                                                                        .sizeOf(
+                                                                            context)
+                                                                    .width *
+                                                                0.32,
+                                                            height: MediaQuery
+                                                                        .sizeOf(
+                                                                            context)
+                                                                    .height *
+                                                                0.16,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryBackground,
+                                                              borderRadius:
+                                                                  const BorderRadius
+                                                                      .only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        24.0),
+                                                                bottomRight: Radius
+                                                                    .circular(
+                                                                        24.0),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        24.0),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        24.0),
+                                                              ),
+                                                              shape: BoxShape
+                                                                  .rectangle,
+                                                            ),
+                                                            child:
+                                                                AuthUserStreamWidget(
+                                                              builder:
+                                                                  (context) =>
+                                                                      InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  final selectedMedia =
+                                                                      await selectMediaWithSourceBottomSheet(
+                                                                    context:
+                                                                        context,
+                                                                    allowPhoto:
+                                                                        true,
+                                                                  );
+                                                                  if (selectedMedia !=
+                                                                          null &&
+                                                                      selectedMedia.every((m) => validateFileFormat(
+                                                                          m.storagePath,
+                                                                          context))) {
+                                                                    setState(() =>
+                                                                        _model.isDataUploading =
+                                                                            true);
+                                                                    var selectedUploadedFiles =
+                                                                        <FFUploadedFile>[];
+
+                                                                    var downloadUrls =
+                                                                        <String>[];
+                                                                    try {
+                                                                      showUploadMessage(
+                                                                        context,
+                                                                        'Uploading file...',
+                                                                        showLoading:
+                                                                            true,
+                                                                      );
+                                                                      selectedUploadedFiles = selectedMedia
+                                                                          .map((m) => FFUploadedFile(
+                                                                                name: m.storagePath.split('/').last,
+                                                                                bytes: m.bytes,
+                                                                                height: m.dimensions?.height,
+                                                                                width: m.dimensions?.width,
+                                                                                blurHash: m.blurHash,
+                                                                              ))
+                                                                          .toList();
+
+                                                                      downloadUrls = (await Future
+                                                                              .wait(
+                                                                        selectedMedia
+                                                                            .map(
+                                                                          (m) async => await uploadData(
+                                                                              m.storagePath,
+                                                                              m.bytes),
+                                                                        ),
+                                                                      ))
+                                                                          .where((u) =>
+                                                                              u !=
+                                                                              null)
+                                                                          .map((u) =>
+                                                                              u!)
+                                                                          .toList();
+                                                                    } finally {
+                                                                      ScaffoldMessenger.of(
+                                                                              context)
+                                                                          .hideCurrentSnackBar();
                                                                       _model.isDataUploading =
-                                                                          true);
-                                                                  var selectedUploadedFiles =
-                                                                      <FFUploadedFile>[];
+                                                                          false;
+                                                                    }
+                                                                    if (selectedUploadedFiles.length ==
+                                                                            selectedMedia
+                                                                                .length &&
+                                                                        downloadUrls.length ==
+                                                                            selectedMedia.length) {
+                                                                      setState(
+                                                                          () {
+                                                                        _model.uploadedLocalFile =
+                                                                            selectedUploadedFiles.first;
+                                                                        _model.uploadedFileUrl =
+                                                                            downloadUrls.first;
+                                                                      });
+                                                                      showUploadMessage(
+                                                                          context,
+                                                                          'Success!');
+                                                                    } else {
+                                                                      setState(
+                                                                          () {});
+                                                                      showUploadMessage(
+                                                                          context,
+                                                                          'Failed to upload data');
+                                                                      return;
+                                                                    }
+                                                                  }
 
-                                                                  var downloadUrls =
-                                                                      <String>[];
-                                                                  try {
-                                                                    selectedUploadedFiles = selectedMedia
-                                                                        .map((m) => FFUploadedFile(
-                                                                              name: m.storagePath.split('/').last,
-                                                                              bytes: m.bytes,
-                                                                              height: m.dimensions?.height,
-                                                                              width: m.dimensions?.width,
-                                                                              blurHash: m.blurHash,
-                                                                            ))
-                                                                        .toList();
-
-                                                                    downloadUrls = (await Future
-                                                                            .wait(
-                                                                      selectedMedia
-                                                                          .map(
-                                                                        (m) async => await uploadData(
-                                                                            m.storagePath,
-                                                                            m.bytes),
+                                                                  await currentUserReference!
+                                                                      .update(
+                                                                          createUsersRecordData(
+                                                                    photoUrl: _model
+                                                                        .uploadedFileUrl,
+                                                                  ));
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        'Successfully Added Photo',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                        ),
                                                                       ),
-                                                                    ))
-                                                                        .where((u) =>
-                                                                            u !=
-                                                                            null)
-                                                                        .map((u) =>
-                                                                            u!)
-                                                                        .toList();
-                                                                  } finally {
-                                                                    _model.isDataUploading =
-                                                                        false;
-                                                                  }
-                                                                  if (selectedUploadedFiles
-                                                                              .length ==
-                                                                          selectedMedia
-                                                                              .length &&
-                                                                      downloadUrls
-                                                                              .length ==
-                                                                          selectedMedia
-                                                                              .length) {
-                                                                    setState(
-                                                                        () {
-                                                                      _model.uploadedLocalFile =
-                                                                          selectedUploadedFiles
-                                                                              .first;
-                                                                      _model.uploadedFileUrl =
-                                                                          downloadUrls
-                                                                              .first;
-                                                                    });
-                                                                  } else {
-                                                                    setState(
-                                                                        () {});
-                                                                    return;
-                                                                  }
-                                                                }
-
-                                                                await currentUserReference!
-                                                                    .update(
-                                                                        createUsersRecordData(
-                                                                  photoUrl: _model
-                                                                      .uploadedFileUrl,
-                                                                ));
-                                                              },
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            24.0),
-                                                                child: Image
-                                                                    .network(
-                                                                  currentUserPhoto,
-                                                                  width: 67.0,
-                                                                  height: 51.0,
-                                                                  fit: BoxFit
-                                                                      .cover,
+                                                                      duration: const Duration(
+                                                                          milliseconds:
+                                                                              4000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .secondary,
+                                                                    ),
+                                                                  );
+                                                                },
+                                                                child:
+                                                                    ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              24.0),
+                                                                  child:
+                                                                      CachedNetworkImage(
+                                                                    fadeInDuration:
+                                                                        const Duration(
+                                                                            milliseconds:
+                                                                                500),
+                                                                    fadeOutDuration:
+                                                                        const Duration(
+                                                                            milliseconds:
+                                                                                500),
+                                                                    imageUrl:
+                                                                        currentUserPhoto,
+                                                                    width: MediaQuery.sizeOf(context)
+                                                                            .width *
+                                                                        0.32,
+                                                                    height: MediaQuery.sizeOf(context)
+                                                                            .height *
+                                                                        0.16,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),

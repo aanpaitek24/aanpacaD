@@ -1,27 +1,28 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_web_view.dart';
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'qrcode_model.dart';
-export 'qrcode_model.dart';
+import 'qrcode_copy_model.dart';
+export 'qrcode_copy_model.dart';
 
-class QrcodeWidget extends StatefulWidget {
-  const QrcodeWidget({super.key});
+class QrcodeCopyWidget extends StatefulWidget {
+  const QrcodeCopyWidget({super.key});
 
   @override
-  State<QrcodeWidget> createState() => _QrcodeWidgetState();
+  State<QrcodeCopyWidget> createState() => _QrcodeCopyWidgetState();
 }
 
-class _QrcodeWidgetState extends State<QrcodeWidget> {
-  late QrcodeModel _model;
+class _QrcodeCopyWidgetState extends State<QrcodeCopyWidget> {
+  late QrcodeCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => QrcodeModel());
+    _model = createModel(context, () => QrcodeCopyModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -113,13 +114,52 @@ class _QrcodeWidgetState extends State<QrcodeWidget> {
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).secondaryBackground,
           ),
-          child: FlutterFlowWebView(
-            content: 'https://flutter.dev',
-            bypass: false,
-            width: MediaQuery.sizeOf(context).width * 1.0,
-            height: MediaQuery.sizeOf(context).height * 1.0,
-            verticalScroll: false,
-            horizontalScroll: false,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AuthUserStreamWidget(
+                builder: (context) => Text(
+                  'ID ${valueOrDefault(currentUserDocument?.qrId, 0).toString()}',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                        fontSize: 16.0,
+                        letterSpacing: 0.0,
+                        fontWeight: FontWeight.w600,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                      ),
+                ),
+              ),
+              Container(
+                width: 300.0,
+                height: 300.0,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                  child: AuthUserStreamWidget(
+                    builder: (context) => BarcodeWidget(
+                      data: valueOrDefault(currentUserDocument?.qrcode, ''),
+                      barcode: Barcode.qrCode(),
+                      width: 300.0,
+                      height: 300.0,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      backgroundColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                      errorBuilder: (context, error) => const SizedBox(
+                        width: 300.0,
+                        height: 300.0,
+                      ),
+                      drawText: false,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

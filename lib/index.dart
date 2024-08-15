@@ -11,3 +11,4 @@ export '/calendar/calendar_widget.dart' show CalendarWidget;
 export '/qrcode/qrcode_widget.dart' show QrcodeWidget;
 export '/create_edit/create_edit_widget.dart' show CreateEditWidget;
 export '/scanner/scanner_widget.dart' show ScannerWidget;
+export '/qrcode_copy/qrcode_copy_widget.dart' show QrcodeCopyWidget;

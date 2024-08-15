@@ -148,6 +148,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Scanner',
           path: '/scanner',
           builder: (context, params) => const ScannerWidget(),
+        ),
+        FFRoute(
+          name: 'qrcodeCopy',
+          path: '/qrcodeCopy',
+          builder: (context, params) => const QrcodeCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
